@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title> login page </title>
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+</head>
+<body>
+    <form>
+      <i class="fa fa-user-circle fa-8x"></i>
+        <h3 >Login Here</h3>
+        <label for="username">Username</label>
+        <input type="text" placeholder="Email or Phone" id="username">
+        <label for="password">Password</label>
+        <input type="password" placeholder="Password" id="password">
+        <button type="button" onclick="Login()">Log In</button>
+        <!--button to register-->
+        <button type="button"><a href="register.html">Register</a></button>
+    </form>
+    <footer>
+      <a href="Home.html">Go to Home </a>
+        <p>Student Affairs website &copy; 2023</p>
+    </footer>
+</body>
+</html>
+<script>
+  function Login(){
+    event.preventDefault();
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var user = localStorage.getItem(username);
+    var data = JSON.parse(user);
+    //if i login dont login again
+    var islogin = localStorage.getItem("islogin");
+    if (islogin == "true") {
+      alert("You are already login");
+      window.location.href = "home.html";
+      return;
+    }
+    if (!data || data.username != username || data.password != password) {
+      alert("Login failed");
+      return;
+    }
+    alert("Login successfully");
+    localStorage.setItem("islogin", "true");
+    window.location.href = "Home.html";
+  }
+</script>
+<style>
+body {
+  background-color:  #f2f2f2;
+  font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+form {
+  position:relative;
+  background-color: white;
+  width: 40%;
+  height: 50%;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+form i{
+  position:absolute;
+  top:-20%;
+  left:40%;
+}
+h3 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+button a {
+  text-decoration: none;
+  color: white;
+}
+button:hover {
+  background-color: #0062cc;
+}
+button[type="button"] {
+  background-color: #009688;
+}
+button[type="button"]:hover {
+  background-color: #009688;
+}
+footer {
+  /*in bottom of page*/
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:  #f2f2f2;
+  color: black;
+  text-align: center;
+}
+footer a {
+  color: black;
+  text-decoration: none;
+}
+footer a:hover {
+  color: #009688;
+  text-decoration: none;
+}
+</style>
+

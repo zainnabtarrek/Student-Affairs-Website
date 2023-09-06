@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="animate.css">
+    <title>Assign Department</title>
+</head>
+<body onload="loa()">
+    <nav>
+        <h2 class="logo">Student Affair</h2>
+        <ul class="nav_links">
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="Add-student.html">Add Student</a></li>
+          <li><a href="Search.html">Search and Update</a></li>
+          <li><a href="View-all-active-inactive-students.html">View Students</a></li>
+          <li id ="chan" ><a href="login.html">Login</a></li>
+
+        </ul>
+    </nav>
+    <main class="animate__animated animate__fadeInLeft">
+        <form>
+        <label for="name">ID</label>
+        <input type="text" placeholder="Enter ID" name="id" id="id" disabled>
+        <label for="name">Name</label>
+        <input type="text" placeholder="Enter Name" name="name" id="name" disabled>
+        <label for="level">level</label>
+        <input type="number" placeholder="Enter level" name="level" id ="level" disabled>
+        <label for="department">Department</label>
+        
+        <select  id="depart">
+            <option class="default" ></option>
+            <option value="IS">IS- Information System</option>
+            <option value="CS">CS- Computer Science</option>
+            <option value="AI">AI- Artificial Intelligence</option>
+            <option value="IT">IT- Information Technology</option>
+            <option value="DS">DS - Decision Support</option>
+            <option value="Not Assigned">Not Assigned</option>
+        </select>
+        <button type="button" onclick="ValidityInput()"> Assign </button>
+        </form>
+        <script>
+            function ValidityInput(){
+                var level = document.getElementById("level").value;
+                var department =document.getElementById("depart").value;
+                if (parseInt(level) < 3 && department != "Not Assigned"){
+                    alert("You can't assign a department to this student assign him to Not Assigned");
+                    department = "Not Assigned";
+                }
+                else if (parseInt(level) >= 3 && department == "Not Assigned"){
+                    alert("You can't assign Not Assigned to this student");
+                }
+                else{
+                    alert("Department Assigned Successfully");
+                    window.location.href = "view-all-active-inactive-students.html";
+                }
+
+            }
+        </script>
+    </main>
+    <footer>
+        <p>Student Affairs website &copy; 2023</p>
+    </footer>
+    <script>
+        let arrayofTasks = [];
+              function clear(){
+                let id = document.getElementById('id').innerHTML = "";
+                let name = document.getElementById('name').innerHTML = "";
+                
+                
+                let level = document.getElementById('level').innerHTML = "";
+                //let depart = document.getElementById('department').innerHTML = "";
+                
+              }
+              function loa(){
+                  clear();
+                let data = window.localStorage.getItem('items');
+                if(data){
+                  let tasks = JSON.parse(data);
+                  arrayofTasks = tasks;
+                }
+                for(let i = 0; i < arrayofTasks.length;i++){
+
+                  if(arrayofTasks[i].id == localStorage.getItem('data-id')){
+                      document.getElementById('id').value = arrayofTasks[i].id;
+                      document.getElementById('name').value =arrayofTasks[i].name;
+                     
+                      document.getElementById('level').value = arrayofTasks[i].level;
+                      document.getElementById('depart').querySelector('.default').innerHTML = arrayofTasks[i].depart;
+                      document.getElementById('depart').querySelector('.default').value = arrayofTasks[i].depart;
+                        flag = true;
+
+                  }
+                }
+              }
+              function addDataToLocalStorageFrom(arrayofTasks){
+                window.localStorage.setItem('items',JSON.stringify(arrayofTasks));
+              }
+              
+              function edit(){
+                let id = document.getElementById('id').value;
+                let name = document.getElementById('name').value;
+                let depart = document.getElementById('department').value;
+                 console.log(depart);
+                for(let i = 0; i < arrayofTasks.length;i++)
+                {
+                  if(arrayofTasks[i].id == id){
+                    arrayofTasks[i].depart = depart;
+                    flag = true;
+               
+                 }
+                }
+                addDataToLocalStorageFrom(arrayofTasks);
+              }
+              let select = document.getElementById('depart');
+              select.addEventListener('click',(e)=>{
+                
+                ass(e.target.value);
+                
+                
+              });
+              function ass(depart){
+                let id = document.getElementById('id').value;
+                
+                
+                for(let i = 0; i < arrayofTasks.length;i++)
+                {
+                  if(arrayofTasks[i].id == id){
+                    arrayofTasks[i].depart = depart;
+                    
+                 }
+                }
+                console.log(arrayofTasks);
+                addDataToLocalStorageFrom(arrayofTasks);
+              }
+    </script>
+</body>
+</html>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing: border-box;
+        text-align: center;
+    }
+     nav {
+        background-color: #333;
+        height: 80px;
+        width: 100%;
+        text-align: center;
+    }
+    nav .logo {
+        color: #fff;
+        font-size: 30px;
+        line-height: 80px;
+        float: left;
+        margin: 0 100px;
+    }
+    nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        position: absolute;
+        right: 50px;
+
+    }
+    nav ul li {
+        float: left;
+        position: relative;
+    }
+    nav ul li a {
+        display: block;
+        padding: 28px 20px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 17px;
+    }
+    nav ul li a:hover {
+        background-color: #009688;
+        transition: .5s;
+    }
+    body{
+        font-family: 'Roboto', sans-serif;
+    }
+    footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    font-size: larger;
+    }
+    footer a {
+        color: white;
+        text-decoration: none;
+    }
+    footer a:hover {
+        color: #009688;
+        transition: .5s;
+    }
+    main {
+        margin: 0 auto;
+        width: 50%;
+        padding: 10px;
+        margin-top: 50px;
+       /* background-color: #f2f2f2;*/
+        font: 30px Arial, sans-serif;
+    }
+    main label {
+        display: block;
+        margin-top: 10px;
+    }
+    main input {
+        display: block;
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-bottom: 2px solid #009688;
+        margin:15px 0;
+    }
+    main input:focus {
+        outline: none;
+    }
+    main button {
+        background-color: #009688;
+        color: white;
+        padding: 14px 20px;
+        margin: 15px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        opacity: 0.9;
+        font: 20px sans-serif;
+    }
+    main button:hover {
+        opacity: 0.8;
+    }
+    select {
+        width: 100%;
+        padding: 16px 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: white;
+    }
+    main a {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+<script>
+    var islogin = localStorage.getItem("islogin");
+  if (islogin=="true"){
+    var chan = document.getElementById("chan");
+    var logout = document.createElement("Button");
+    logout.style.display
+    document.getElementById("chan").innerHTML = "<a id ='press' onclick='Change()' >Log Out</a>";
+  }
+  else{
+    document.getElementById("chan").innerHTML = "<a href='login.html'>Login</a>";
+  }
+  function Change(){
+    localStorage.setItem("islogin", "false");
+    window.location.href = "Home.html";
+  }
+  </script>

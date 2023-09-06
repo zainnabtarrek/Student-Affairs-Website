@@ -1,0 +1,419 @@
+<!DOCTYPE html >
+<html lang = "en" >
+<head>
+  <title>Student Affairs Website</title>
+  <meta charset = "utf-8" >
+  <meta name = "viewport" content = "width=device-width, initial-scale=1.0" >
+  <link rel="stylesheet" href="animate.css">
+  <link rel="stylesheet" href="fontawesome/css/all.css">
+</head>
+<body>
+    <header>
+      <nav>
+        <div class="container">
+        
+        <ul class="nav_links">
+          <li><a href="Home.html">Home</a></li>
+          <li id ="1"><a  onclick="Checklogin('1')" >Add Student</a></li>
+          <li id ="2"><a  onclick="Checklogin('2')">Search and Update</a></li>
+          <li id ="3"><a onclick="Checklogin('3')">View Students</a></li>
+          <li id ="chan" ><a href="login.html">Login</a></li>
+        </ul>
+      <script>
+        function Checklogin(id){
+          var islogin = localStorage.getItem("islogin");
+          if (islogin=="true"){
+            if (id == "1"){
+              window.location.href = "Add-student.html";
+              return
+            }
+            else if (id == "2"){
+              window.location.href = "Search.html";
+              return
+            }
+            else if (id == "3"){
+              window.location.href = "View-all-active-inactive-students.html";
+              return;
+            }
+          }
+          else{
+            alert("You must login first");
+            window.location.href = "login.html";
+            return;
+          }
+        }
+      </script>
+      
+    </div>
+    </nav>
+    <div class="container">
+      <div class="title animate__animated animate__fadeInLeft" style="color:rgb(179, 216, 228)">
+        <h1 style="font-size:90px;">
+          Welcome to 
+        </h1>
+        <h3>the student affairs of FCAI</h3>
+      </div>
+    </div>
+    </header>
+    <section class="about-us">
+      <div class="container">
+        <div class="about-card">
+          <h3>About Us</h3>
+          <p>We are the student affairs of FCAI, we provide students with several services,Check the services we provide below.</p>
+        </div>
+      </div>
+    </section>
+    <section class="services">
+      <div class="container">
+        <h2 style="margin-bottom:30px">Services </h2>
+        <div class="cards-grid animate__animated animate__fadeInDown">
+          <div class="card">
+            <i class="fa fa-desktop card__icon fa-6x"></i>
+             <div class="card__body">
+                <h4 class="card__head">Add_Student</h4>
+                <p class="card__content">Students are added to the system using this service</p>
+             </div>
+          </div>
+          <div class="card">
+            <i class="fa fa-desktop card__icon fa-6x"></i>
+             <div class="card__body">
+                <h4 class="card__head">Update</h4>
+                <p class="card__content">We Update current enrolled student information here</p>
+             </div>
+          </div>
+          <div class="card">
+            <i class="fa fa-desktop card__icon fa-6x"></i>
+             <div class="card__body">
+                <h4 class="card__head">Assign Depart</h4>
+                <p class="card__content">We Assign Departs to current enroll students</p>
+             </div>
+          </div>
+      </div>
+    </section>
+    <section class="department">
+      <div class="container">
+        <h2 style="margin-bottom:30px">Department </h2>
+        <div class="cards-grid ">
+          <div class="card">
+            <i class="fa fa-desktop card__icon fa-6x"></i>
+             <div class="card__body">
+                <h4 class="card__head">Computer Science</h4>
+                <p class="card__content">Computer science is the study of computation, automation, and information</p>
+             </div>
+          </div>
+          <div class="card">
+            <i class="fa fa-desktop card__icon fa-6x"></i>
+             <div class="card__body">
+                <h4 class="card__head">Artificial Intelligence</h4>
+                <p class="card__content"> the simulation of human intelligence processes by machines, especially computer systems</p>
+             </div>
+          </div>
+          <div class="card">
+            <i class="fa fa-desktop card__icon fa-6x"></i>
+             <div class="card__body">
+                <h4 class="card__head">Information System</h4>
+                <p class="card__content">an integrated set of components for collecting, storing, and processing data and for providing information, knowledge, and digital products.</p>
+             </div>
+          </div>
+          <div class="card">
+            <i class="fa fa-desktop card__icon fa-6x"></i>
+            <div class="card__body">
+               <h4 class="card__head">Decision Support</h4>
+               <p class="card__content">Students are added to the system using this service</p>
+            </div>
+         </div>
+         <div class="card">
+          <i class="fa fa-desktop card__icon fa-6x"></i>
+            
+            <div class="card__body">
+               <h4 class="card__head">Information Technology</h4>
+               <p class="card__content">We Update current enrolled student information here</p>
+            </div>
+         </div>
+         <div class="card">
+          <i class="fa fa-desktop card__icon fa-6x"></i>
+            
+            <div class="card__body">
+               <h4 class="card__head">UnAssigned</h4>
+               <p class="card__content">Students who are 2 year or less, are given unassigned department as default</p>
+            </div>
+         </div>
+      </div>
+    </section>
+    <footer>
+      <div class="container">
+        <p>Student Affairs website &copy; 2023</p>
+      </div>
+    </footer>
+</body>
+</html>
+<style>
+ 
+  *{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+  }
+  .container{
+    width:1200px;
+    margin:auto;
+  }
+  header{
+    background: rgb(234,222,227);
+    background: radial-gradient(circle, rgba(234,222,227,1) 0%, rgba(51,221,241,1) 100%);
+    height:100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    position: relative;
+  }
+  header::before{
+    content:"";
+    display:block;
+    height:100%;
+    width:100%;
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364); 
+    opacity: 0.6;
+    position:absolute;
+    z-index:1
+  }
+  nav {
+        height: 80px;
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        z-index: 200;
+    }
+    nav .logo {
+        color: #fff;
+        font-size: 30px;
+        line-height: 80px;
+        float: left;
+        
+    }
+    .title{
+      text-align:center;
+      position: absolute;
+      z-index:200;
+      top:35%;
+      left:33%;
+      font-size:30px;
+
+    }
+    nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        position: absolute;
+        right: 50px;
+
+    }
+    nav ul li {
+        float:right ;
+        position: relative;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 28px 20px;
+        color: rgb(179, 216, 228);
+        text-decoration: none;
+        font-size: 17px;
+        
+    }
+    nav ul li a:hover {
+        background-color: #0f7068;
+        border-radius: 20px;
+        transition: .5s;
+        cursor: grab;
+    }
+    .about-us{
+      padding:60px 0;
+      background-color:black;
+      color:rgb(179, 216, 228);
+    }
+    .about-card h3{
+        margin-bottom:10px;
+    }
+    .about-card p{
+      font-size:20px;
+    }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      grid-gap: 4em 2rem;
+   }
+   .services{
+    padding:60px 0;
+   }
+   .card {
+      border-radius: 6px;
+      box-shadow: 0 20px 40px 0 rgba(173, 181, 189, 0.1);
+      border: solid 1px rgba(129, 147, 174, 0.12);
+      background-color: #fff;
+      padding: 2.5em;
+      text-align: center;
+      position: relative;
+   }
+   
+   .card:first-child::before {
+      content: "";
+      position: absolute;
+      background-color: #ffd25f;
+      top: -8px;
+      left: -1px;
+      width: calc(100% + 2px);
+      height: 8px;
+      border-radius: 6px 6px 0 0;
+   }
+   
+   .card:nth-child(2)::before {
+      content: "";
+      position: absolute;
+      background-color: #63a2ff;
+      top: -8px;
+      left: -1px;
+      width: calc(100% + 2px);
+      height: 8px;
+      border-radius: 6px 6px 0 0;
+   }
+   
+   .card:nth-child(3)::before {
+      content: "";
+      position: absolute;
+      background-color: #5ed291;
+      top: -8px;
+      left: -1px;
+      width: calc(100% + 2px);
+      height: 8px;
+      border-radius: 6px 6px 0 0;
+   }
+   .card:nth-child(4)::before {
+    content: "";
+    position: absolute;
+    background-color: #ffd25f;
+    top: -8px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: 8px;
+    border-radius: 6px 6px 0 0;
+ }
+ 
+ .card:nth-child(5)::before {
+    content: "";
+    position: absolute;
+    background-color: #63a2ff;
+    top: -8px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: 8px;
+    border-radius: 6px 6px 0 0;
+ }
+ 
+ .card:nth-child(6)::before {
+    content: "";
+    position: absolute;
+    background-color: #5ed291;
+    top: -8px;
+    left: -1px;
+    width: calc(100% + 2px);
+    height: 8px;
+    border-radius: 6px 6px 0 0;
+ }
+   
+   .card__body {
+      padding-top: 1em;
+   }
+   
+   .card__head {
+      --fs-h4: 2rem;
+      font-size: var(--fs-h4);
+      margin-bottom: 1em;
+      color: var(--clr-head);
+   }
+   
+   .card__content {
+      --fs-body: 1.6rem;
+      font-size: var(--fs-body);
+   }
+   .department 
+   .card {
+    border-radius: 6px;
+    box-shadow: 0 20px 40px 0 rgba(173, 181, 189, 0.1);
+    border: solid 1px rgba(129, 147, 174, 0.12);
+    background-color:#fff;
+    padding: 2.5em;
+    text-align: center;
+    color:black;
+    position: relative;
+ }
+   .department{
+    border-top:solid 1px rgba(129, 147, 174, 0.12);
+    background: linear-gradient(to right, #2193b0, #6dd5ed);
+    padding:50px 0;
+   }
+   .department h2{
+    color:#fff;
+    font-size:30px;
+   }
+
+    /*
+     body {
+        background-color:  #f2f2f2;
+    } 
+    */
+    /*
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+    }
+    */
+    /*
+    section {
+        width: 50%;
+        height: 50%;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+    }
+    */
+    button {
+      display: block;
+        padding: 28px 20px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 17px;
+    }
+    footer {
+    
+    
+    background-color: black;
+    padding:20px 0;
+    font-size:20px;
+    color: white;
+    text-align: center;
+    
+    }
+    
+
+</style>
+<script>
+  var islogin = localStorage.getItem("islogin");
+  if (islogin=="true"){
+    var chan = document.getElementById("chan");
+    var logout = document.createElement("button");
+    logout.style.display 
+    document.getElementById("chan").innerHTML = "<a id ='press' onclick='Change()' >Log Out</a>";
+  }
+  else{
+    document.getElementById("chan").innerHTML = "<a href='login.html'>Login</a>";
+  }
+  function Change(){
+    localStorage.setItem("islogin", "false");
+    window.location.href = "Home.html";
+  }
+</script>

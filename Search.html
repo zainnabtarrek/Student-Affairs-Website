@@ -1,0 +1,349 @@
+<!--search for student-->
+<!DOCTYPE html >
+<head>
+    <title>search and update </title>
+    <meta charset = "utf-8" >
+    <meta name = "viewport" content = "width=device-width, initial-scale=1.0" >
+    <link rel="stylesheet" href="animate.css">
+</head>
+<body>
+    <nav>
+        <h2 class="logo">Student Affair</h2>
+        <ul class="nav_links">
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="Add-student.html">Add Student</a></li>
+          <li><a href="Search.html">Search and Update</a></li>
+          <li><a href="View-all-active-inactive-students.html">View Students</a></li>
+          <li id="chan"><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+    <div class="search-box animate__animated animate__fadeInLeft">    
+        <label for="filterInput"><h1>Enter the Name for student</h1></label>
+        <input type="text" id="filterInput" placeholder="Enter Student name">
+        <button type="button" id="filterButton">Search</button>
+        <br>  <br>
+    </div>
+    <table id="filterTable" class="animate__animated animate__fadeInDown">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>email</th>
+                <th>phone</th>
+                <th>department</th>
+                <th>status</th>
+                <th>Update</th>
+
+            </tr>
+        </thead>
+        <tbody id="ul">
+            <tr>
+                <td>20210467</td>
+                <td>ahmed</td>
+                <td> @gmail.com</td>
+                <td>0123456789</td>
+                <td>cs</td>
+                <td>active</td>
+                <td> <a href="Update.html">update</a></td>
+            </tr>
+            <tr>
+                <td>20210468</td>
+                <td>ali</td>
+                <td> @gmail.com</td>
+                <td>0123456789</td>
+                <td>cs</td>
+                <td>active</td>
+                <td> <a href="Update.html">update</a></td>
+            </tr>
+            <tr>
+                <td>20210469</td>
+                <td>ahmed</td>
+                <td> @gmail.com</td>
+                <td>0123456789</td>
+                <td>cs</td>
+                <td>active</td>
+                <td> <a href="Update.html">update</a></td>
+            </tr>
+            <tr>
+                <td>20210488</td>
+                <td>ahmed</td>
+                <td> @gmail.com</td>
+                <td>0123456789</td>
+                <td>cs</td>
+                <td>active</td>
+               <td> <a href="Update.html">update</a></td>
+            </tr>
+            <tr>
+                <td>20210000</td>
+                <td>ahmed</td>
+                <td> @gmail.com</td>
+                <td>0123456789</td>
+                <td>cs</td>
+                <td>active</td>
+                <td> <a href="Data-an-existing-student-information.html">update</a></td>
+            </tr>
+            <tr>
+                <td>20210484</td>
+                <td>ahmed</td>
+                <td> @gmail.com</td>
+                <td>0123456789</td>
+                <td>cs</td>
+                <td>active</td>
+                <td> <a href="Data-an-existing-student-information.html">update</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        let arrayofTasks = [];
+        getDataFromLocalStorage();
+        function getDataFromLocalStorage(){
+            let data = window.localStorage.getItem('items');
+            if(data){
+              let tasks = JSON.parse(data);
+              arrayofTasks = tasks;
+            }
+          }
+          
+          let table = document.getElementById('ul');
+        function addElementToPageFrom(arrayofTasks){
+            table.innerHTML = "";
+            arrayofTasks.filter((task)=>{
+              let tr = document.createElement("tr");
+              tr.className = 'collection-item';
+              /* id */
+              let id = document.createElement("td");
+  
+              id.className = "data-id";
+              id.appendChild(document.createTextNode(task.id));
+              tr.appendChild(id);
+              /* id */
+              /* name */
+              let name = document.createElement("td");
+              name.appendChild(document.createTextNode(task.name));
+              tr.appendChild(name);
+              /* name */
+              /* department */
+              let depart = document.createElement("td");
+              depart.appendChild(document.createTextNode(task.email));
+              tr.appendChild(depart);
+              /* department */
+              
+              /* phone */
+              let phone = document.createElement("td");
+              phone.appendChild(document.createTextNode(task.mobile));
+              tr.appendChild(phone);
+              /* phone */
+              /* department */
+              let department = document.createElement("td");
+              
+              department.appendChild(document.createTextNode(task.depart));
+              
+              tr.appendChild(department);
+              /* assign */
+
+             
+                          /* State */
+              let status = document.createElement("td");
+                 
+              status.appendChild(document.createTextNode(task.activity == "1" ? 'active' : 'inactive'));
+              tr.appendChild(status);
+              // if the user is active then add to the table 
+                if(task.activity == "1"){
+                    let update = document.createElement("td");
+               let anc = document.createElement('a');
+               anc.className = "update";
+               anc.setAttribute("href","Update.html");
+               anc.appendChild(document.createTextNode("Update"));
+               update.appendChild(anc);
+               tr.appendChild(update);
+              table.appendChild(tr);
+                }
+            }) 
+          }
+          addElementToPageFrom(arrayofTasks);
+        const filterInput = document.getElementById('filterInput');
+        const filterButton = document.getElementById('filterButton');
+        const filterTable = document.getElementById('filterTable');
+        filterButton.addEventListener('click', filterNames);
+        function filterNames() {
+            let filterValue = document.getElementById('filterInput').value.toUpperCase();
+            let tr = filterTable.getElementsByTagName('tr');
+            for (let i = 0; i < tr.length; i++) {
+                let td = tr[i].getElementsByTagName('td')[1];
+                if (td) {
+                    let textValue = td.textContent || td.innerText;
+                    if (textValue.toUpperCase().indexOf(filterValue) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+        let upda = document.getElementById('ul');
+        upda.addEventListener('click',(e)=>{
+         
+          if(e.target.classList.contains("update")){
+            console.log(e.target.parentElement.parentElement.querySelector('.data-id').innerHTML);
+              localStorage.setItem('data-id',e.target.parentElement.parentElement.querySelector('.data-id').innerHTML);
+          
+          }
+          
+        });
+    </script>
+    <footer>
+        <p>Student Affairs website &copy; 2023</p>
+    </footer>
+</body>
+</html>
+<style>
+    body {
+        background-color: #f2f2f2;
+        font-family: 'Roboto', sans-serif;
+    }
+    nav {
+        background-color: #333;
+        height: 80px;
+        width: 100%;
+        text-align: center;
+    }
+    nav .logo {
+        color: #fff;
+        font-size: 30px;
+        line-height: 80px;
+        float: left;
+        margin: 0 100px;
+    }
+    nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        position: absolute;
+        right: 50px;
+
+    }
+
+    nav ul li {
+        float: left;
+        position: relative;
+    }
+
+    nav ul li a {
+        display: block;
+        padding: 28px 20px;
+        color: #fff;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    nav ul li a:hover {
+        background-color: #009688;
+        transition: .5s;
+    }
+    .search-box {
+        width: 300px;
+        position: relative;
+        display: inline-block;
+        font-size: 14px;
+    }
+    .search-box input[type="text"] {
+        height: 32px;
+        padding: 5px 10px;
+        border: 1px solid #CCCCCC;
+        font-size: 14px;
+    }
+    .result {
+        position: absolute;
+        z-index: 999;
+        top: 100%;
+        left: 0;
+    }
+    .search-box input[type="text"], .result {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .result p {
+        margin: 0;
+        padding: 7px 10px;
+        border: 1px solid #CCCCCC;
+        border-top: none;
+        cursor: pointer;
+    }
+
+    .result p:hover {
+        background: #f2f2f2;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 18px;
+    }
+
+    th,
+    td {
+        text-align: left;
+        padding: 16px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2
+    }
+
+    th {
+        background-color: #009688;
+        color: white;
+    }
+    table a {
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+    color: white;
+    text-align: center;
+    }
+    footer a {
+        color: white;
+        text-decoration: none;
+    }
+    footer a:hover {
+        color: #009688;
+        transition: .5s;
+    }
+    button {
+        background-color: #009688;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+</style>
+<script>
+    var islogin = localStorage.getItem("islogin");
+  if (islogin=="true"){
+    var chan = document.getElementById("chan");
+    var logout = document.createElement("Button");
+    logout.style.display
+    document.getElementById("chan").innerHTML = "<a id ='press' onclick='Change()' >Log Out</a>";
+  }
+  else{
+    document.getElementById("chan").innerHTML = "<a href='login.html'>Login</a>";
+  }
+  function Change(){
+    localStorage.setItem("islogin", "false");
+    window.location.href = "Home.html";
+  }
+</script>

@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Update Student</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="animate.css">
+</head>
+<body onload="loa()">
+	<header>
+		<h2>Student Affairs website</h2>
+		<ul class="nav_links">
+			<li><a href="Home.html">Home</a></li>
+			<li><a href="Add-student.html">Add Student</a></li>
+			<li><a href="Search.html">Search and Update</a></li>
+			<li><a href="View-all-active-inactive-students.html">View Students</a></li>
+			<li id ="chan" ><a href="login.html">Login</a></li>
+		</ul>
+	  </header>
+	  <main class="animate__animated animate__fadeInLeft">
+		<form method="post" onsubmit="event.preventDefault();">
+		  <section>
+		  <label for="id" class="block">ID:</label>
+		  <input type="text" id="id" name="Id" class="frame"  autofocus placeholder="Eg:20210467" value="20210467" disabled>
+		  </section>
+		  <section>
+		  <label for="name" class="block">Name:</label>
+		  <input type="text" id="name" name="Name" class="frame" placeholder="Eg:yousef hussien" value="yousef">
+		  </section>
+		  <section>
+		  <label for="date" class="block">Date of Birth:</label>
+		  <input type="date" id="date" name="Date" class="frame" >
+      <script>
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        if (month < 10) {
+          month = "0" + month;
+        }
+        var day = date.getDate();
+        if (day < 10) {
+          day = "0" + day;
+        }
+        var today = year + "-" + month + "-" + day;
+        document.getElementById("date").value=today;
+      </script>
+		  </section>
+		  <section>
+		  <label for="gpa" class="block">GPA:</label>
+		  <input type="text" id="gpa" name="Gpa" class="frame" placeholder="Eg:2.1 " value="2.0">
+		  </section>
+		   <section class="circle">
+		  <label for="gender">Gender:</label>
+      	 <input type="radio" id="male" name="Gender" value="male" checked> 
+	  
+		   <label for="male">Male</label>
+		  <input type="radio" id="female" name="Gender" value="female" >
+		  <label for="female">Female</label>
+		  <input type="radio" id="other" name="Gender" value="other">
+		  <label for="other">Other</label> 
+		  </section>
+		  <section class="circle">
+			<label for="state">Status:</label>
+			<input type="radio" id="active" name="Status" value="active" >
+			 <label for="state">Active</label>
+			 <input type="radio" id="inactive" name="Status" value="inactive">
+			<label for="state">Inactive</label>
+		  </section>
+			<section class ="circle"> 
+				<label for="department" class="block"> Department: </label>
+				<select name="Department" id="department" class="frame">
+				<option class="default"></option>
+				<option value="CS">CS</option>
+				<option value="IS">IS</option>
+				<option value="AI">AI</option>
+				<option value="DS">DS</option>
+				<option value="IT">IT</option>
+				<option value="Not Assign">Not Assign</option>
+				</select>
+		  </section>
+		  <section>
+		  <label for="level" class="block">Level:</label>
+		  <input type="number" id="level" name="Level" class="frame" min="1" max="4" step="1" value="1">
+		  </section>
+		 <section>
+		  <label for="email" class="block">Email:</label>
+		  <input type="text" id="email" name="Email" class="frame" placeholder="Eg: gg@hmail.com" value="gg@hmail.com">
+		  </section>
+		  <section>
+		  <label for="mobile" class="block">Mobile Number:</label>
+		  <input type="text" id="mobile" name="Mobile" class="frame" placeholder="Eg : 01063005573" value="01063005573">
+		  </section>
+		  <section>
+		  <input type="submit" value ="Save Change" onclick="AddStudent()">
+		  <input type="reset"  value ="Reset">
+		  </section>
+		</form>
+		<script> 
+			console.log(localStorage.getItem('data-id'))
+			let arrayofTasks = [];
+              function clear(){
+                let id = document.getElementById('id').innerHTML = "";
+                let name = document.getElementById('name').innerHTML = "";
+                let dateB = document.getElementById('date').innerHTML = "";
+                let gpa = document.getElementById('gpa').innerHTML = "";
+                let level = document.getElementById('level').innerHTML = "";
+            
+                let email = document.getElementById('email').innerHTML = "";
+                let mobile = document.getElementById('mobile').innerHTML = "";
+              }
+			  function loa(){
+				/*clear();*/
+				
+			  console.log(localStorage.getItem('data-id'))
+			  let data = window.localStorage.getItem('items');
+			  if(data){
+				let tasks = JSON.parse(data);
+				arrayofTasks = tasks;
+			  }
+			  for(let i = 0; i < arrayofTasks.length;i++){
+
+				if(arrayofTasks[i].id == localStorage.getItem('data-id')){
+					document.getElementById('id').value = arrayofTasks[i].id;
+					document.getElementById('name').value =arrayofTasks[i].name;
+					if(arrayofTasks[i].gen == "male"){
+						document.getElementById('male').checked = true;
+					}else if(arrayofTasks[i].gen == "female"){
+						document.getElementById('female').checked = true;
+					}else{
+						document.getElementById('other').checked = true;
+					}
+					if(arrayofTasks[i].activity == "1"){
+						document.getElementById('active').checked = true;
+					}else{
+						document.getElementById('inactive').checked = true;
+					}
+				   
+					document.getElementById('date').value = arrayofTasks[i].date;
+				   document.getElementById('gpa').value = arrayofTasks[i].gpa;
+					document.getElementById('level').value = arrayofTasks[i].level;
+				    document.getElementById('department').querySelector('.default').innerHTML = arrayofTasks[i].depart;
+                      document.getElementById('department').querySelector('.default').value = arrayofTasks[i].depart;
+					document.getElementById('email').value = arrayofTasks[i].email;
+					document.getElementById('mobile').value = arrayofTasks[i].mobile;
+				}
+			  }
+			}
+			function addDataToLocalStorageFrom(arrayofTasks){
+			  window.localStorage.setItem('items',JSON.stringify(arrayofTasks));
+			}
+			function AddStudent() {
+				const ID = document.getElementById('id').value.trim();
+				const Name = document.getElementById('name').value.trim();
+				const Birth = document.getElementById('date').value;
+				const GPA = document.getElementById('gpa').value;
+				const Email = document.getElementById('email').value.trim();
+				const Mobile = document.getElementById('mobile').value.trim();
+				const Level = document.getElementById('level').value;
+				const Genders = document.getElementsByName('Gender');
+				let Gender;
+				let State;
+				for (let i = 0; i < Genders.length; i++) {
+					if (Genders[i].checked) {
+						 Gender = Genders[i].value;
+						break;
+					}
+				}
+				//const Level = document.getElementById('level').value;
+				const Status = document.getElementsByName('Status');
+				for (let i = 0; i < Status.length; i++) {
+					if (Status[i].checked) {
+						State = Status[i].value;
+						break;
+					}
+				}
+				const Department = document.getElementById('department').value;
+				console.log(Department)
+				/*
+				if (ID == "" ||ID.length != 8) {
+					alert("Please enter an ID");
+					return false;
+				}
+				
+				
+				if (isNaN(ID)) {
+					alert("Enter an appropriate ID");
+					return false;
+				}
+				*/
+				if (Name == "") {
+					alert("Please enter a Name");
+					return false;
+				}
+				
+				if (!isNaN(Name) ) {
+					alert("Enter an appropriate Name");
+					return false;
+				}
+				if (Birth == "") {
+					alert("Please enter a Date of Birth");
+					return false;
+				}
+				
+				if (GPA == "") {
+					alert("Please enter a GPA");
+					return false;
+				}
+				if (isNaN(GPA) || GPA < 0 || GPA > 4) {
+					alert("Please enter a valid GPA between 0 and 4");
+					return false;
+				}
+				
+				if (Gender == undefined) {
+					alert("Please enter a gender");
+					return false;
+				}
+				
+				if (Level == "") {
+					alert("Please enter a Level");
+					return false;
+				}
+				if (isNaN(Level) || Level < 1 || Level > 4) {
+					alert("Please enter a valid Level between 1 and 4");
+					return false;
+				}
+				if (parseInt(Level)<3 && Department!="Not Assign"){
+					alert("Level 1 or 2 students must not be assigned to a department");
+					return false;
+				}
+				if (parseInt(Level)>2 && Department=="Not Assign"){
+					alert("Level 3 or 4 students must be assigned to a department");
+					return false;
+				}
+				if (State == undefined) {
+					alert("Please enter a status");
+					return false;
+				}
+				if (Department == "") {
+					alert("Please select a Department");
+					return false;
+				}
+				if (Email == "") {
+					alert("Please enter an Email");
+					return false;
+				}
+				if (!validateEmail(Email)) {
+					alert("Enter an appropriate Email");
+					return false;
+				}
+				if (Mobile == "") {
+					alert("Please enter a Mobile Number");
+					return false;
+				}
+				if (Mobile[0] != '0' || Mobile[1] != '1' || Mobile.length != 11) {
+					alert("Enter an appopriate Mobile Number");
+					return false;
+				}
+				else {
+					alert("Edit " + Name + " went successfuly");
+					for(let i = 0; i < arrayofTasks.length;i++)
+					{
+					  if(arrayofTasks[i].id == ID){
+						arrayofTasks[i].name = Name;
+						arrayofTasks[i].date = Birth;
+						arrayofTasks[i].gpa = GPA;
+						arrayofTasks[i].level = Level;
+						arrayofTasks[i].email = Email;
+						arrayofTasks[i].depart = Department;
+						arrayofTasks[i].mobile = Mobile;
+						arrayofTasks[i].gen = Gender;
+						arrayofTasks[i].activity = State == 'active'? 1 : 0;
+					 }
+					}
+					addDataToLocalStorageFrom(arrayofTasks);
+					location.href = "Search.html";
+				}
+			}
+			function validateEmail(email) {
+				const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+				return regex.test(email);
+			}
+		</script>
+	  </main>
+	  <footer>
+		  <p>Student Affairs website &copy; 2023</p>
+	  </footer>	
+</body>
+</html>
+<style>
+	body {
+		background-color:   #f2f2f2;
+		font-family: 'Roboto', sans-serif;
+	}
+	header {
+		display: flex;
+		justify-content: space-between;
+		background-color: #333;
+		color: white;
+		padding: 10px;
+	}
+	header h2 {
+		padding: 10px;
+	}
+	header ul {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;
+		background-color: #333;
+	}
+	header li {
+		float: left;
+	}
+	header li a {
+		display: block;
+		color: white;
+		text-align: center;
+		padding: 14px 16px;
+		text-decoration: none;
+		margin-top: 20px;
+	}
+	header li a:hover {
+		background-color: #009688;
+	}
+	header li a.active {
+		background-color: #4CAF50;
+	}
+	 
+	footer {
+		  background-color: #333;
+		  color: white;
+		  padding: 10px;
+		  text-align: center;
+	  }
+	  footer a {
+		  color: white;
+		  text-decoration: none;
+	  }
+	  main {
+		  padding: 10px;
+		  width:600px;
+		  margin:auto;
+		  margin-top: 10px;
+		  margin-bottom: 10px;
+		  background-color: white;
+		  /*border: 1px solid #009688;*/
+		  border-radius: 10px;
+	  }
+	  section {
+		  padding: 10px;
+		  margin-left: 20%;
+		  margin-right: 20%;
+		  margin-top: 10px;
+		  margin-bottom: 10px;
+		  background-color: white;
+		 /* border: 1px solid #009688;*/
+		  border-radius: 10px;
+	  }
+	  .block {
+		  display: block;
+		  margin-top: 10px;
+		  margin-bottom: 10px;
+		  margin-left: 2px;
+		  margin-right: 2px;
+	  }
+	  .frame {
+		  display: block;
+		  margin-top: 10px;
+		  margin-bottom: 10px;
+		  margin-left: 2px;
+		  margin-right: 2px;
+		  border: 1px solid #ccc;
+		  width:100%;
+		  border-radius: 5px;
+		  padding: 10px 0;
+	  }
+	  
+	  .button {
+		  background-color: #009688;
+		  border: none;
+		  color: white;
+		  padding: 10px 20px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin: 4px 2px;
+		  cursor: pointer;
+	  }
+	  .button:hover {
+		  background-color: #009688;
+		  color: white;
+	  }
+	  .button:active {
+		  background-color: #009688;
+		  color: white;
+	  }
+	  .button:visited {
+		  background-color: #009688;
+		  color: white;
+	  }
+	  .button:link {
+		  background-color: #009688;
+		  color: white;
+	  }
+	  
+	  .btn {
+		width: 180px;
+		height: 60px;
+		cursor: pointer;
+		background: transparent;
+		border: 1px solid #91C9FF;
+		outline: none;
+		transition: 1s ease-in-out;
+	  }
+	  
+	  svg {
+		position: absolute;
+		left: 0;
+		top: 0;
+		fill: none;
+		stroke: #fff;
+		stroke-dasharray: 150 480;
+		stroke-dashoffset: 150;
+		transition: 1s ease-in-out;
+	  }
+	  
+	  .btn:hover {
+		transition: 1s ease-in-out;
+		background: #4F95DA;
+	  }
+	  
+	  .btn:hover svg {
+		stroke-dashoffset: -480;
+	  }
+	  
+	  .btn span {
+		color: white;
+		font-size: 18px;
+		font-weight: 100;
+	  }
+	  input[type=text], select {
+		  width: 100%;
+		  padding: 12px 20px;
+		  margin: 8px 0;
+		  display: inline-block;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		  box-sizing: border-box;
+	  }
+	  input[type=number], select {
+		  width: 100%;
+		  padding: 12px 20px;
+		  margin: 8px 0;
+		  display: inline-block;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		  box-sizing: border-box;
+	  }
+	  input[type=email], select {
+		  width: 100%;
+		  padding: 12px 20px;
+		  margin: 8px 0;
+		  display: inline-block;
+		  border: 1px solid #ccc;
+		  border-radius: 4px;
+		  box-sizing: border-box;
+	  }
+	  input[type=submit] {
+		  width: 100%;
+		  background-color: #009688;
+		  color: white;
+		  padding: 14px 20px;
+		  margin: 8px 0;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+	  }
+	  input[type=submit]:hover {
+		  background-color: #009688;
+	  }
+	  input[type=submit]:active {
+		  background-color: #009688;
+	  }
+	  input[type=submit]:visited {
+		  background-color: #009688;
+	  }
+	  input[type=submit]:link {
+		  background-color: #009688;
+	  }
+	  input[type=reset] {
+		  width: 100%;
+		  background-color: #009688;
+		  color: white;
+		  padding: 14px 20px;
+		  margin: 8px 0;
+		  border: none;
+		  border-radius: 4px;
+		  cursor: pointer;
+	  }
+	  input[type=reset]:hover {
+		  background-color: #009688;
+	  }
+	  input[type=reset]:active {
+		  background-color: #009688;
+	  }
+	  input[type=reset]:visited {
+		  background-color: #009688;
+	  }
+	  input[type=reset]:link {
+		  background-color: #009688;
+	  }
+	  footer a:hover {
+  color: #009688;
+  text-decoration: none;
+}
+</style>
+<script>
+	var islogin = localStorage.getItem("islogin");
+  if (islogin=="true"){
+	var chan = document.getElementById("chan");
+	var logout = document.createElement("Button");
+	logout.style.display
+	document.getElementById("chan").innerHTML = "<a id ='press' onclick='Change()' >Log Out</a>";
+  }
+  else{
+	document.getElementById("chan").innerHTML = "<a href='login.html'>Login</a>";
+  }
+  function Change(){
+	localStorage.setItem("islogin", "false");
+	window.location.href = "Home.html";
+  }
+  </script>

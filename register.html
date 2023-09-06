@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Register</title>
+        <link rel="stylesheet" href="fontawesome/css/all.css">
+    </head>
+    <body>
+        <form>
+          <i class="fa fa-user-circle fa-8x"></i>
+            <h3>Register Here</h3>
+            <label for="username">Username</label>
+            <input type="text" placeholder="Email or Phone" id="username">
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" id="password">
+            <label for="password">Confirm Password</label>
+            <input type="password" placeholder="Confirm Password" id="confirmPassword">
+            <button type="button" onclick="adddata()">Register</button>
+            <button type="button" onclick="window.location.href='login.html'">Login</button>
+        </form>
+        <footer>
+            <a href="Home.html">Go to Home </a>
+            <p>Student Affairs website &copy; 2023</p>
+        </footer>
+</html>
+<script>
+    function adddata(){
+        event.preventDefault();
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        if (password != confirmPassword ) {
+            alert("Password not match");
+            return;
+        }
+        else if (username == "" || password == "" || confirmPassword == "") {
+            alert("Please fill all the fields");
+            return;
+        }
+        var data = {
+            username: username,
+            password: password
+        }
+        localStorage.setItem(username, JSON.stringify(data));
+        alert("Register successfully");
+        window.location.href = "login.html";
+    }
+</script>
+<style>
+body {
+  background-color:  #f2f2f2;
+  font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+
+}
+form {
+  background-color: white;
+  width: 40%;
+  height: 50%;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  position:relative;
+}
+h3 {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 30px;
+}
+label {
+  display: block;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+form i{
+  position:absolute;
+  top:-20%;
+  left:40%;
+}
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+button a {
+  text-decoration: none;
+  color: white;
+}
+button:hover {
+  background-color: #0062cc;
+}
+button[type="button"] {
+  background-color: #009688;
+}
+button[type="button"]:hover {
+  background-color: #009688;
+}
+footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color:  #f2f2f2;
+  color: black;
+  text-align: center;
+}
+footer a {
+  color: black;
+  text-decoration: none;
+}
+footer a:hover {
+  color: #009688;
+  text-decoration: none;
+}
+
+</style>
